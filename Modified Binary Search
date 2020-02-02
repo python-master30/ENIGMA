@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] a = new int[6];
+        for(int i = 0;i<a.length;i++) {
+            a[i] = scanner.nextInt();
+        }
+        //for the sake of this code, we assume user enters the element in sorted order
+        int number = binarySearch(a,6);
+        System.out.println("Element found at index " + number);
+    }
+    public static int binarySearch(int[] arr, int n){
+         int low = 0;
+         int high = arr.length-1;
+         while(low<=high){
+             int mid = (low + high)/2;
+             if((arr[low]>n)||(arr[high]<n)){
+                 return -1;
+             }
+             if(arr[low]==n){
+                 return low;
+             }else if(arr[high]==n){
+                 return high;
+             } else{
+                 if(arr[mid]==n){
+                     return mid;
+                 }else if(arr[mid]>n){
+                     high = mid-1;
+                     low++;
+                 } else if(arr[mid]<n){
+                     low = mid+1;
+                     high--;
+                 }
+             }
+         }
+         return -1;
+    }
+}
